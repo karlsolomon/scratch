@@ -23,6 +23,7 @@
 #include "FreeRTOS.h"
 #include "main.h"
 #include "portable.h"
+#include "portmacro.h"
 #include "stm32l4xx_hal.h"
 #include "task.h"
 /* Private includes ----------------------------------------------------------*/
@@ -143,8 +144,8 @@ void DebugMon_Handler(void) {
 
     /* USER CODE END DebugMonitor_IRQn 1 */
 }
-/*void PendSV_Handler(void) { xPortPendSVHandler(); }*/
-/*void SVC_Handler(void) { vPortSVCHandler(); }*/
+void PendSV_Handler(void) { xPortPendSVHandler(); }
+void SVC_Handler(void) { vPortSVCHandler(); }
 
 /**
  * @brief This function handles System tick timer.

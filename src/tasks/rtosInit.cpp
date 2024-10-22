@@ -28,7 +28,7 @@ static void exampleTask(void *parameters) {
     (void)parameters;
 
     for (;;) {
-        vTaskDelay(100); /* delay 100 ticks */
+        // vTaskDelay(100); /* delay 100 ticks */
     }
 }
 

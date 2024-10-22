@@ -38,6 +38,9 @@ add_subdirectory(cmake/stm32)
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE inc)
 
+set(freeRTOS "/home/ksolomon/git/FreeRTOS/FreeRTOS/Source")
+set(port "${freeRTOS}/portable/GCC/ARM_CM4F")
+
 # Add sources to executable
 target_sources(
     ${CMAKE_PROJECT_NAME}
@@ -48,6 +51,7 @@ target_sources(
             src/stm32l4xx_hal_msp.c
             src/system_stm32l4xx.c
             src/tasks/rtosInit.cpp
+            ${port}/port.c
 )
 
 # Add linked libraries

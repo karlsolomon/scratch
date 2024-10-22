@@ -56,16 +56,6 @@ void PendSV_Handler(void);
 void SVC_Handler(void);
 void SysTick_Handler(void);
 void TIM2_IRQHandler(void);
-void I2C1_EV_IRQHandler(void);
-void I2C1_ER_IRQHandler(void);
-void SPI1_IRQHandler(void);
-void USART1_IRQHandler(void);
-void UART4_IRQHandler(void);
-void LPTIM1_IRQHandler(void);
-void OTG_FS_IRQHandler(void);
-void LPUART1_IRQHandler(void);
-void QUADSPI_IRQHandler(void);
-void HASH_RNG_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

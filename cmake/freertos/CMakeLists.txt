@@ -7,10 +7,10 @@ add_library(freertos INTERFACE)
 enable_language(CXX C ASM)
 
 # target_compile_definitions(freertos INTERFACE $<$<CONFIG:Debug>:DEBUG>)
-
+block(PROPAGATE freeRTOS port)
 set(freeRTOS "/home/ksolomon/git/FreeRTOS/FreeRTOS/Source")
 set(port "${freeRTOS}/portable/GCC/ARM_CM4F")
-
+endblock()
 target_include_directories(freertos INTERFACE ${freeRTOS}/include ${port})
 
 target_sources(
@@ -20,7 +20,7 @@ target_sources(
               ${freeRTOS}/tasks.c
               ${freeRTOS}/timers.c
               ${freeRTOS}/queue.c
-              ${port}/port.c
+              # ${port}/port.c
 )
 
 target_link_directories(freertos INTERFACE)

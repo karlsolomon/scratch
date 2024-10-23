@@ -20,7 +20,7 @@
 void RTOS_Init() {
     (void)xTaskCreate(exampleTask, "example", configMINIMAL_STACK_SIZE, nullptr, RTOS_PRIORITY_IDLE, nullptr);
     (void)xTaskCreate(heartbeatTask, "heartbeat", configMINIMAL_STACK_SIZE, nullptr, RTOS_PRIORITY_LOW, nullptr);
-    (void)xTaskCreate(vcpTask, "vcp", 8 * configMINIMAL_STACK_SIZE, nullptr, RTOS_PRIORITY_LOW, nullptr);
+    (void)xTaskCreate(vcpTask, "vcp", 2 * configMINIMAL_STACK_SIZE, nullptr, RTOS_PRIORITY_LOW, nullptr);
     vTaskStartScheduler();
 }
 void exampleTask(void *parameters) {

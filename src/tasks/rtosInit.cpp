@@ -15,28 +15,18 @@
  *
  ******************************************************************************
  */
-#include "rtosInit.h"
-
+#include "rtos.h"
 #include "task.h"
-static void exampleTask(void *parameters);
 void RTOS_Init() {
-    (void)xTaskCreate(exampleTask, "example", configMINIMAL_STACK_SIZE, NULL, configMAX_PRIORITIES - 1U, NULL);
+    (void)xTaskCreate(exampleTask, "example", configMINIMAL_STACK_SIZE, nullptr, RTOS_PRIORITY_IDLE, nullptr);
+    (void)xTaskCreate(heartbeatTask, "heartbeat", configMINIMAL_STACK_SIZE, nullptr, RTOS_PRIORITY_LOW, nullptr);
+    /*(void)xTaskCreate(vcpTask, "vcp", configMINIMAL_STACK_SIZE, nullptr, RTOS_PRIORITY_LOW, nullptr);*/
     vTaskStartScheduler();
 }
-
-static void exampleTask(void *parameters) {
+void exampleTask(void *parameters) {
     (void)parameters;
 
     for (;;) {
-        // vTaskDelay(100); /* delay 100 ticks */
+        vTaskDelay(1); /* delay 100 ticks */
     }
-}
-
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer,
-                                   StackType_t *pulIdleTaskStackSize) {
-    static StaticTask_t xIdleTaskTCB;
-    static StackType_t uxIdleTaskStack[configMINIMAL_STACK_SIZE];
-    *ppxIdleTaskTCBBuffer = &xIdleTaskTCB;
-    *ppxIdleTaskStackBuffer = uxIdleTaskStack;
-    *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
 }

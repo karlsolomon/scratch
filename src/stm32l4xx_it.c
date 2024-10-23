@@ -144,8 +144,8 @@ void DebugMon_Handler(void) {
 
     /* USER CODE END DebugMonitor_IRQn 1 */
 }
-void PendSV_Handler(void) { xPortPendSVHandler(); }
-void SVC_Handler(void) { vPortSVCHandler(); }
+/*void PendSV_Handler(void) { xPortPendSVHandler(); }*/
+/*void SVC_Handler(void) { vPortSVCHandler(); }*/
 
 /**
  * @brief This function handles System tick timer.

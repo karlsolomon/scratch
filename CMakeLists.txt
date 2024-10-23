@@ -51,6 +51,10 @@ target_sources(
             src/stm32l4xx_hal_msp.c
             src/system_stm32l4xx.c
             src/tasks/rtosInit.cpp
+            src/tasks/heartbeat.cpp
+            src/tasks/vcp.cpp
+            src/drivers/gpio.c
+            src/drivers/com.cpp
             ${port}/port.c
 )
 

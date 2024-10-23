@@ -10,12 +10,6 @@
 #include "stm32l4xx_ll_gpio.h"
 #include "task.h"
 
-static const LL_GPIO_InitTypeDef btn = {.Pin = BTN1_PIN,
-                                        .Mode = LL_GPIO_MODE_INPUT,
-                                        .Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH,
-                                        .OutputType = LL_GPIO_OUTPUT_PUSHPULL,
-                                        .Pull = LL_GPIO_PULL_NO,
-                                        .Alternate = LL_GPIO_AF_0};
 static const LL_GPIO_InitTypeDef led1 = {.Pin = LD1_PIN,
                                          .Mode = LL_GPIO_MODE_OUTPUT,
                                          .Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH,
@@ -40,10 +34,8 @@ static const std::vector<std::pair<GPIO_TypeDef *, LL_GPIO_InitTypeDef>> leds = 
 void heartbeatTask(void *parameters) {
     (void)parameters;
     // Initialize pins
-    /*LL_GPIO_Init(BTN1_PORT, &btn);*/
     for (auto [port, pin] : leds) {
         LL_GPIO_Init(port, &pin);
-        /*LL_GPIO_SetOutputPin(port, pin.Pin);*/
     }
     while (true) {
         for (auto [port, pin] : leds) {

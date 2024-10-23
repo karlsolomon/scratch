@@ -21,6 +21,7 @@
 #include "stm32l4xx_it.h"
 
 #include "FreeRTOS.h"
+#include "com.h"
 #include "main.h"
 #include "portable.h"
 #include "portmacro.h"
@@ -185,3 +186,22 @@ void TIM2_IRQHandler(void) {
 
     /* USER CODE END TIM2_IRQn 1 */
 }
+
+#ifdef USART1
+void USART1_IRQHandler() { COMPort::irqHandler(USART1); }
+#endif
+#ifdef USART2
+void USART2_IRQHandler() { COMPort::irqHandler(USART2); }
+#endif
+#ifdef USART3
+void USART3_IRQHandler() { COMPort::irqHandler(USART3); }
+#endif
+#ifdef UART4
+void UART4_IRQHandler() { COMPort::irqHandler(UART4); }
+#endif
+#ifdef UART5
+void UART5_IRQHandler() { COMPort::irqHandler(UART5); }
+#endif
+#ifdef USART6
+void USART6_IRQHandler() { COMPort::irqHandler(USART6); }
+#endif

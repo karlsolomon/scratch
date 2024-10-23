@@ -82,6 +82,7 @@ void COMPort::gets(uint8_t* const buf, size_t len) {
     }
 }
 void COMPort::configure() {
+    LL_USART_Disable(this->usart);
     this->tx.Mode = LL_GPIO_MODE_ALTERNATE;
     this->tx.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
     this->tx.OutputType = LL_GPIO_OUTPUT_PUSHPULL;

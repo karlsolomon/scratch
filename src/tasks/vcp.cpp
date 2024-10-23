@@ -10,25 +10,25 @@
 
 void vcpTask(void *parameters) {
     (void)parameters;
-    /*#define BUFSIZE 128*/
-    /*#define BAUD 921600*/
-    /*    LL_GPIO_InitTypeDef tx;*/
-    /*    tx.Pin = VCP_TX_PIN;*/
-    /*    tx.Alternate = LL_GPIO_AF_4;*/
-    /*    LL_GPIO_InitTypeDef rx;*/
-    /*    rx.Pin = VCP_RX_PIN;*/
-    /*    rx.Alternate = LL_GPIO_AF_4;*/
-    /**/
-    /*    COMPort com = COMPort(VCP_TX_PORT, USART2, tx, BUFSIZE, rx, BUFSIZE, BAUD);*/
-    /*    com.configure();*/
-    /*    __HAL_RCC_USART2_CLK_ENABLE();*/
-    /**/
+#define BUFSIZE 128
+#define BAUD 9600
+    LL_GPIO_InitTypeDef tx;
+    tx.Pin = VCP_TX_PIN;
+    tx.Alternate = LL_GPIO_AF_7;
+    LL_GPIO_InitTypeDef rx;
+    rx.Pin = VCP_RX_PIN;
+    rx.Alternate = LL_GPIO_AF_7;
+
+    __HAL_RCC_USART2_CLK_ENABLE();
+    COMPort com = COMPort(VCP_TX_PORT, USART2, tx, BUFSIZE, rx, BUFSIZE, BAUD);
+    com.configure();
+
     for (;;) {
-        /*while (!com.isInputEmpty()) {*/
-        /*    uint8_t c;*/
-        /*    com.getc(&c);*/
-        /*    com.putc(&c);*/
-        /*}*/
-        /*vTaskDelay(1);*/
+        while (!com.isInputEmpty()) {
+            uint8_t c;
+            com.getc(&c);
+            com.putc(&c);
+        }
+        vTaskDelay(1);
     }
 }

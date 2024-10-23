@@ -56,6 +56,12 @@ void PendSV_Handler(void);
 void SVC_Handler(void);
 void SysTick_Handler(void);
 void TIM2_IRQHandler(void);
+void USART1_IRQHandler();
+void USART2_IRQHandler();
+void USART3_IRQHandler();
+void UART4_IRQHandler();
+void UART5_IRQHandler();
+void USART6_IRQHandler();
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

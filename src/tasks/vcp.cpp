@@ -27,7 +27,7 @@ void vcpTask(void *parameters) {
         while (!com.isInputEmpty()) {
             uint8_t c;
             com.getc(&c);
-            com.putc(&c);
+            com.puts(&c, 1);
         }
         vTaskDelay(1);
     }

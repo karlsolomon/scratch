@@ -67,6 +67,7 @@ void COMPort::irqHandler(USART_TypeDef* uart) {
     if ((LL_USART_IsActiveFlag_TXE(com->usart) != 0U)) {  // && (LL_USART_IsActiveFlag_TC(com->usart) != 0U)) {
         if (com->output.isEmpty()) {
             LL_USART_DisableIT_TXE(com->usart);  // no need to fire interrupt if the buffer is empty
+            USART2->ICR = USART2->ISR;  // FIXME: look into exactly which flag was causing issue. One of (0x6010D8)
         } else {
             com->output.pop(&c);
             LL_USART_TransmitData8(com->usart, c);

@@ -3,8 +3,8 @@
 #include <string>
 
 #include "FreeRTOS.h"
-#define VCP_BUFSIZE_TX 64
-#define VCP_BUFSIZE_RX 64
+#define VCP_BUFSIZE_TX 32
+#define VCP_BUFSIZE_RX 32
 #define VCP_BAUD 921600
 
 void vcpTask(void* parameters);

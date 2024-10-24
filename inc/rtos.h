@@ -14,6 +14,11 @@ using RTOS_Priority_e = enum {
     RTOS_PRIORITY_HIGH = 3,
     RTOS_PRIORITY_MAX = RTOS_PRIORITY_HIGHEST
 };
+
+#define VCP_PRIORITY RTOS_PRIORITY_LOW
+#define HEARTBEAT_PRIORITY RTOS_PRIORITY_IDLE
+#define EXAMPLE_PRIORITY RTOS_PRIORITY_IDLE
+
 void vcpTask(void *parameters);
 void heartbeatTask(void *parameters);
 void exampleTask(void *parameters);

@@ -1,4 +1,5 @@
 #include <ranges>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -9,6 +10,7 @@
 #include "stm32l4xx_hal_gpio.h"
 #include "stm32l4xx_ll_gpio.h"
 #include "task.h"
+#include "vcp.h"
 
 static const LL_GPIO_InitTypeDef led1 = {.Pin = LD1_PIN,
                                          .Mode = LL_GPIO_MODE_OUTPUT,
@@ -38,14 +40,17 @@ void heartbeatTask(void *parameters) {
         LL_GPIO_Init(port, &pin);
     }
     while (true) {
+        static std::string up = "turning LEDs on\n\r";
+        static std::string down = "turning LEDs off\n\r";
+        vcpPutLazy((uint8_t *)up.c_str(), up.length());
         for (auto [port, pin] : leds) {
             LL_GPIO_TogglePin(port, pin.Pin);
-            vTaskDelay(pdMS_TO_TICKS(50));
+            vTaskDelay(pdMS_TO_TICKS(500));
         }
-
+        vcpPutLazy((uint8_t *)down.c_str(), down.length());
         for (auto [port, pin] : std::ranges::reverse_view(leds)) {
             LL_GPIO_TogglePin(port, pin.Pin);
-            vTaskDelay(pdMS_TO_TICKS(50));
+            vTaskDelay(pdMS_TO_TICKS(500));
         }
     }
 }

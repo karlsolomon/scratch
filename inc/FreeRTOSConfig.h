@@ -92,8 +92,10 @@ extern unsigned long getRunTimeCounterValue(void);
 #define configUSE_COUNTING_SEMAPHORES 0
 #define configENABLE_BACKWARD_COMPATIBILITY 0
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 0
-#define configUSE_TICKLESS_IDLE 0
+#define configUSE_TICKLESS_IDLE 0  // I'll need to set to 1 for low-power mode on final product
 #define configUSE_POSIX_ERRNO 1
+/*#define configUSE_NEWLIB_REENTRANT 1*/
+
 /* USER CODE BEGIN MESSAGE_BUFFER_LENGTH_TYPE */
 /* Defaults to size_t for backward compatibility, but can be changed
    if lengths will always be less than the number of bytes in a size_t. */

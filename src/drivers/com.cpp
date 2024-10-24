@@ -4,6 +4,7 @@
 
 #include "stm32l4xx_ll_bus.h"
 #include "stm32l4xx_ll_gpio.h"
+#include "stm32l4xx_ll_lpuart.h"
 #include "stm32l4xx_ll_rcc.h"
 #include "stm32l4xx_ll_usart.h"
 
@@ -53,11 +54,17 @@ COMPort::COMPort(GPIO_TypeDef* port, USART_TypeDef* usart, LL_GPIO_InitTypeDef t
 void COMPort::irqHandler(USART_TypeDef* uart) {
     uint8_t c;
     COMPort* com = ports[uart];
-    if (LL_USART_IsActiveFlag_RXNE(uart)) {
+    if (LL_USART_IsActiveFlag_RXNE(uart) != 0U) {
         c = LL_USART_ReceiveData8(com->usart);
-        com->input.push(c);
+        if (!com->input.isFull()) {
+            // Do not overwrite unprocessed input. Simply increment a counter indicating that data was missed. This can
+            // be used as indication as to whether the buffer should be increased for expected use case.
+            com->input.push(c);
+        } else {
+            com->missedBytes++;
+        }
     }
-    if (LL_USART_IsActiveFlag_TXE(com->usart) && LL_USART_IsActiveFlag_TC(com->usart)) {
+    if ((LL_USART_IsActiveFlag_TXE(com->usart) != 0U)) {  // && (LL_USART_IsActiveFlag_TC(com->usart) != 0U)) {
         if (com->output.isEmpty()) {
             LL_USART_DisableIT_TXE(com->usart);  // no need to fire interrupt if the buffer is empty
         } else {
@@ -72,7 +79,7 @@ void COMPort::puts(uint8_t const* const buf, size_t len) {
         putc(buf + i);
     }
     if (!LL_USART_IsEnabledIT_TXE(this->usart)) {
-        LL_USART_EnableIT_TXE(this->usart);  //  enable TXE interrupt
+        LL_USART_EnableIT_TXE(this->usart);
     }
 }
 
@@ -108,10 +115,7 @@ void COMPort::configure() {
     LL_USART_ConfigAsyncMode(this->usart);
     LL_USART_EnableDirectionTx(this->usart);
     LL_USART_EnableDirectionRx(this->usart);
-    if (!LL_USART_IsEnabledIT_TXE(this->usart)) {
-        LL_USART_EnableIT_TXE(this->usart);
-    }
-    if (!LL_USART_IsEnabledIT_RXNE(this->usart)) {
+    if (LL_USART_IsEnabledIT_RXNE(this->usart) == 0U) {
         LL_USART_EnableIT_RXNE(this->usart);
     }
     NVIC_SetPriority(irqMap[this->usart].first, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
@@ -119,3 +123,9 @@ void COMPort::configure() {
     LL_RCC_SetUSARTClockSource(irqMap[this->usart].second);
     LL_USART_Enable(this->usart);
 };
+
+void COMPort::enableTXIRQ() {
+    if (LL_USART_IsEnabledIT_TXE(this->usart) == 0U) {
+        LL_USART_EnableIT_TXE(this->usart);
+    }
+}

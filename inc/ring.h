@@ -7,7 +7,6 @@ class Ring {
     size_t sz;
     size_t head = 0;
     size_t tail = 0;
-    size_t n = 0;
     std::vector<T> buf;
 
  public:
@@ -20,28 +19,26 @@ class Ring {
     auto size() -> size_t { return sz; }
     auto push(T v) -> RING_ERR_E {
         RING_ERR_E ret = ERR_OK;
-        if (this->n == this->sz) {
+        if (this->isFull()) {
             ret = ERR_FULL;
         } else {
             this->buf[this->tail] = v;
             this->tail = (this->tail + 1) % this->sz;
-            this->n++;
         }
         return ret;
     }
     auto pop(T* v) -> RING_ERR_E {
         RING_ERR_E ret = ERR_OK;
-        if (this->n == 0) {
+        if (this->head == this->tail) {
             ret = ERR_EMPTY;
         } else {
             *v = this->buf[this->head];
             this->head = (this->head + 1) % this->sz;
-            this->n--;
         }
         return ret;
     }
-    auto isEmpty() -> bool { return this->n == 0; }
-    auto isFull() -> bool { return this->n == this->sz; }
-    auto getN() -> size_t { return this->n; }
+    auto isEmpty() -> bool { return this->head == this->tail; }
+    auto isFull() -> bool { return (this->tail + 1) % this->sz == this->head; }
+    auto getN() -> size_t { return ((this->tail + this->sz) - this->head) % this->sz; }
 };
 #endif  // _RING_H_

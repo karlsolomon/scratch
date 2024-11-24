@@ -1,8 +1,8 @@
 #ifndef _VCP_H_
 #define _VCP_H_
+#include <cstdint>
 #include <string>
 
-#include "FreeRTOS.h"
 #define VCP_BUFSIZE_TX 32
 #define VCP_BUFSIZE_RX 32
 #define VCP_BAUD 921600

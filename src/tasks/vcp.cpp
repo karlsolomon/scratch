@@ -7,13 +7,11 @@
 
 #include "FreeRTOS.h"
 #include "com.h"
-#include "main.h"
 #include "pins.h"
 #include "portmacro.h"
 #include "projdefs.h"
 #include "rtos.h"
 #include "semphr.h"
-#include "stm32l4xx_hal_gpio.h"
 #include "stm32l4xx_ll_gpio.h"
 #include "task.h"
 

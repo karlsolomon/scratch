@@ -1,0 +1,87 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{lipsum} % For placeholder text
+
+
+
+% Commands
+\newcommand{\productName}{TrailTrackerUL}
+
+% Page layout
+\geometry{margin=1in}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Software Requirements Document}
+\fancyhead[C]{TrailTrackerUL}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+
+% Section title formatting
+\titleformat{\section}{\large\bfseries}{}{0em}{} 
+\titleformat{\subsection}{\bfseries}{}{0em}{} 
+
+\title{\textbf{Software Requirements Document} \\ \vspace{0.5em} \productName}
+\author{Karl Solomon}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\section{Introduction}
+This document provides the software requirements for a lightweight and portable GPS tracking device. The purpose of this device is to track the location of assets or individuals in real-time.
+
+\section{Definitions}
+\begin{itemize}[label=,itemindent=1em]
+	\item \textbf{GPS} - Global Positioning System, a satellite-based navigation system used to determine the location of a device.
+	\item \textbf{Session} - A period during which the device records location data for up to 10 days.
+	\item \textbf{Real-Time Operating System (RTOS)} - An operating system that manages hardware resources and runs applications with precise timing requirements.
+\end{itemize}
+
+\newpage
+
+\section{Functional Requirements}
+\begin{enumerate}[label=\textbf{FR\arabic*}, itemindent=1em]
+	\item The device shall have an on-off switch.
+	\item The device shall have a button to start a new session.
+	\item The device shall be able to record at least 10 sessions.
+	\item The device shall be able to acquire GPS signals.
+	\item The device shall be able to calculate and track the current location.
+	\item The device shall be able to record location data for at least 10 days of continuous use.
+	\item The device shall have an interface to extract session-data.
+\end{enumerate}
+
+\newpage
+
+\section{Non-Functional Requirements}
+\begin{enumerate}[label=\textbf{NFR\arabic*},itemindent=2em]
+	\item The device shall be lightweight, weighing no more than 100 grams.
+	\item The device shall have a battery life of at least 240 hours.
+	\item The device shall be able to withstand temperatures from -30°C to 65°C.
+	\item The device shall be water-proof.
+	\item The device shall be able to withstand a drop of at least 2 meters.
+\end{enumerate}
+
+\newpage
+
+\section{System Requirements}
+\begin{enumerate}[label=\textbf{SR\arabic*},itemindent=1em]
+	\item The device shall run on a real-time operating system.
+	\item The device shall have a microcontroller with at least 32-bit architecture.
+	\item The device shall record a position at least once per minute.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,1 @@
+10K PDR on A0-A2 --> 0x18 7-bit addr

@@ -1,0 +1,15 @@
+# CPP
+#CPP for ARM
+ CompileFlags:
+   Add: [ -std=c++2c, -xc++, -Wall, -Wpedantic, -Wextra, -fsanitize=undefined, -fsanitize=safe-stack, -O2, -I/usr/arm-none-eabi/include/, -I/usr/arm-none-eabi/include/c++/14.1.0/, -I/usr/arm-none-eabi/include/c++/14.1.0/arm-none-eabi/, -Wno-unknown-warning-option]
+   Remove: [-f*,]
+   Compiler: /usr/bin/arm-none-eabi-c++
+ Diagnostics:
+   UnusedIncludes: Strict
+   ClangTidy:
+     FastCheckFilter: None
+     Add: [modernize*, bugprone*, readability*]
+     Remove: [readability-identifier-length,]
+     CheckOptions:
+       readability-identifier-naming.VariableCase: camelCase
+

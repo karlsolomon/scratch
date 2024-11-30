@@ -2,9 +2,7 @@
 
 #include <cstdint>
 
-#include "stm32l4xx_ll_bus.h"
 #include "stm32l4xx_ll_gpio.h"
-#include "stm32l4xx_ll_lpuart.h"
 #include "stm32l4xx_ll_rcc.h"
 #include "stm32l4xx_ll_usart.h"
 
@@ -79,7 +77,7 @@ void COMPort::puts(uint8_t const* const buf, size_t len) {
     for (size_t i = 0; i < len; i++) {
         putc(buf + i);
     }
-    if (!LL_USART_IsEnabledIT_TXE(this->usart)) {
+    if (LL_USART_IsEnabledIT_TXE(this->usart) == 0U) {
         LL_USART_EnableIT_TXE(this->usart);
     }
 }

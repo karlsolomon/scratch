@@ -47,13 +47,13 @@ target_sources(
     PRIVATE startup_stm32l4a6xx.s
             STM32L4A6ZGTx_FLASH.ld
             src/main.cpp
-            src/stm32l4xx_it.c
-            src/stm32l4xx_hal_msp.c
-            src/system_stm32l4xx.c
+            src/stm32l4xx_it.cpp
+            src/stm32l4xx_hal_msp.cpp
+            src/system_stm32l4xx.cpp
             src/tasks/rtosInit.cpp
             src/tasks/heartbeat.cpp
             src/tasks/vcp.cpp
-            src/drivers/gpio.c
+            src/drivers/gpio.cpp
             src/drivers/com.cpp
             ${port}/port.c
 )
